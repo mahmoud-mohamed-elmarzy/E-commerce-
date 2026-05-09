@@ -1,0 +1,45 @@
+<section class="bg-[#0aad0a] py-16 px-4">
+  <div class="container mx-auto">
+    <nav class="text-emerald-100 text-sm mb-4">
+      <a class="opacity-70 hover:opacity-100 cursor-pointer" routerLink="/">Home</a> / <span>Categories</span>
+    </nav>
+
+    <div class="flex items-center gap-5">
+      <div
+        class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center text-white text-2xl backdrop-blur-md">
+        <i class="fa-solid fa-layer-group"></i>
+      </div>
+      <div>
+        <h1 class="text-4xl font-black text-white">All Categories</h1>
+        <p class="text-emerald-50 font-medium opacity-90">Browse our wide range of product categories</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-12 bg-white">
+  <div class="container mx-auto px-4">
+
+
+
+    <div class="mt-6 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+      @for(catgory of catgoryList() ;track catgory._id){
+      <div [routerLink]="['/categorydeitales',catgory._id,catgory.slug]"
+        class="hover:shadow-lg hover:-translate-y-2 rounded p-4 border border-gray-200 hover:border-sky-300 duration-500 text-center flex flex-col items-center cursor-pointer group">
+        <div class="overflow-hidden rounded">
+          <img [src]="catgory.image" class="size-50 group-hover:scale-120  duration-500  rounded" [alt]="catgory.name">
+        </div>
+        <h3 class="text-xl fa-bold mt-3">{{catgory.name}}</h3>
+        <p class=" mt-3 text-sm opacity-0 group-hover:opacity-100 text-green-800 duration-500 ">View Subcategories <i class="fa-solid fa-arrow-right-long"></i></p>
+      </div>
+      }@empty {
+      <div class="col-span-full flex flex-col justify-center items-center py-20">
+        <i class="fas fa-spinner fa-spin text-4xl text-blue-500 mb-4"></i>
+        <h2 class="text-gray-500 text-xl font-medium">Loading Products...</h2>
+      </div>
+      }
+
+
+    </div>
+  </div>
+</section>

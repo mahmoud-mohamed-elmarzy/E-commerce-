@@ -1,0 +1,48 @@
+.item {
+    background-image: linear-gradient(to right, #00c758e6, #05df7280), url(/assets/home-slider-1.d79601a8.png);
+    background-size: cover;
+    background-position: center;
+}
+
+
+/* content initially hidden */
+
+.slide-content {
+    opacity: 0;
+    transform: translateY(30px);
+    /* يبدأ متحرك شوية تحت */
+    transition: all 0.6s ease;
+}
+
+
+/* content يظهر لما slide يبقى active */
+
+.swiper-slide-active .slide-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+swiper-container::part(bullet) {
+    background-color: white;
+    width: 16px;
+    height: 16px;
+}
+
+swiper-container::part(bullet-active) {
+    height: 12px;
+    width: 40px;
+    background-color: white;
+    border-radius: 5px;
+    transition: all .5s ease-in-out;
+}
+
+swiper-container::part(button-next),
+swiper-container::part(button-prev) {
+    color: #00cc00;
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 10px;
+    margin-inline: 20px;
+}

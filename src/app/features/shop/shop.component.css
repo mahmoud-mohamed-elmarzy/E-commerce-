@@ -1,0 +1,32 @@
+/* 1. تنسيق عام لكل الأزرار */
+::ng-deep .ngx-pagination li {
+    margin: 0 5px;
+}
+
+/* 2. الرقم النشط (Active) */
+::ng-deep .ngx-pagination .current {
+    background: #3b82f6 !important; /* لون Tailwind blue-500 */
+    border-radius: 6px !important;
+    padding: 4px 12px !important;
+    color: white !important;
+}
+
+/* 3. تفعيل شكل الأزرار المعطلة (Previous/Next) */
+::ng-deep .ngx-pagination .disabled {
+    padding: 4px 10px;
+    opacity: 0.4; /* اجعلها باهتة قليلاً فقط */
+}
+
+/* 4. تغيير شكل السهم أو الكلمة داخل الزر المعطل */
+::ng-deep .ngx-pagination .disabled span {
+    color: #6b7280 !important; /* لون رمادي واضح */
+    cursor: not-allowed;
+}
+
+/* 5. تأثير الـ Hover على الأرقام العادية */
+::ng-deep .ngx-pagination a:hover {
+    background: #eff6ff !important; /* لون أزرق خفيف جداً */
+    color: #1d4ed8 !important;
+    border-radius: 6px;
+    text-decoration: none;
+}

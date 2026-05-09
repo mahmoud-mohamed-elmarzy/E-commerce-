@@ -1,0 +1,65 @@
+<section class="bg-white dark:bg-gray-900">
+  <div class="bg-[#A855F7] py-16 px-4 sm:px-6 lg:px-8 text-white">
+    <div class="container mx-auto">
+      <nav class="flex mb-4" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-3">
+          <li class="inline-flex items-center text-sm font-medium hover:text-gray-200">
+            Home
+          </li>
+          <li>
+            <div class="flex items-center">
+              <span class="mx-2">/</span>
+              <span class="text-sm font-medium">Brands</span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <div class="bg-white/20 p-4 rounded-xl shadow-lg">
+          <svg class="w-10 h-10 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+            viewBox="0 0 24 24">
+            <path fill-rule="evenodd"
+              d="M4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4Zm10 5a1 1 0 1 0 0 2h3a1 1 0 1 0 0-2h-3Z"
+              clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-4xl font-extrabold tracking-tight">Top Brands</h1>
+          <p class="mt-2 text-lg text-purple-100">Shop from your favorite brands</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white">
+    <div class="container bg-white mx-auto py-12 px-4">
+      <div class="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+        @for (barnd of barndList(); track barnd._id) {<div (click)="goToDetails(barnd._id)"
+          class="group cursor-pointer p-6 bg-white border border-gray-100 rounded-2xl shadow-sm group  hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center border-b-4 hover:border-b-purple-500">
+
+          <div class="h-32 flex items-center justify-center p-2 bg-gray-50 rounded mb-4">
+            <img [src]="barnd.image" [alt]="barnd.name"
+              class="max-h-full max-w-full scale-90 group-hover:scale-100 object-contain grayscale group-hover:grayscale-0 transition duration-300">
+          </div>
+
+          <h3 class="text-lg font-semibold text-gray-800 group-hover:text-[#A855F7]">{{barnd.name}}</h3>
+          <a class="group-hover:text-[#A855F7] text-sm  opacity-0 duration-350 group-hover:opacity-100">
+
+
+            View Products
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>}
+        @empty {
+        <div class="container my-auto flex justify-center items-center ">
+          <div class="">
+            <h1 class="text-gray-600 text-3xl"> <i class="fas fa-spinner fa-spin"></i></h1>
+            <h2 class="text-gray-600 text-3xl">Louding ...... </h2>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

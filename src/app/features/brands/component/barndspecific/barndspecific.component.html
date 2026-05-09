@@ -1,0 +1,129 @@
+<section class=" bg-green-500 py-10">
+
+
+  <nav class="flex mb-6 text-gray-600 max-w-screen-xxl mx-auto px-6  items-center gap-6">
+    <ol class="inline-flex items-center space-x-2">
+      <li class="text-gray-400 hover:text-white cursor-pointer duration-100" routerLink="/">Home</li>
+      <li class="text-gray-400">/</li>
+      <li class="text-gray-400 hover:text-white cursor-pointer duration-100" routerLink="/brands">Brands</li>
+      <li class="text-gray-400">/</li>
+      <li class="font-medium text-white cursor-pointer">{{proudectBrand().name}}</li>
+    </ol>
+  </nav>
+
+  <div class="max-w-screen-xxl mx-auto px-6 flex items-center gap-6">
+
+    <div class="bg-green-400 p-3 rounded-lg">
+      <div class="p-1 ">
+        <img [src]="proudectBrand().image" [alt]="proudectBrand().name" class="w-12">
+      </div>
+    </div>
+
+    <div>
+      <h1 class="text-3xl text-white font-bold">{{proudectBrand().name}}</h1>
+      <p class="text-green-100">Shop Canon products</p>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="max-w-screen-xxl  mx-auto px-6 py-6">
+
+
+
+  <div class="flex items-center gap-4 mb-6">
+
+    <span class="text-gray-500">Active Filters:</span>
+
+    <span class="bg-purple-100 text-purple-700 text-sm px-3 py-1 rounded-full flex items-center gap-2 cursor-pointer"
+      routerLink="/">
+      {{proudectBrand().name}}
+      <button>✕</button>
+    </span>
+
+    <button class="text-blue-600 hover:underline text-gray cursor-pointer" routerLink="/shop">
+      Clear all
+    </button>
+
+  </div>
+
+  @if(products().length > 0) {
+  <section
+    class="container mx-auto mt-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 items-stretch">
+    @for (item of products(); track item._id) {
+    <app-card [product]="item" [hasDiscount]="item.priceAfterDiscount" class="h-full">
+
+    @if(item.priceAfterDiscount) {
+      <div class="flex items-center gap-3">
+        <span class="text-emerald-600 font-bold text-lg leading-none">
+          {{item.priceAfterDiscount}} EGP
+        </span>
+        <span class="text-gray-400 line-through text-xs mt-1">
+          {{item.price}} EGP
+        </span>
+      </div>
+    }
+
+  </app-card>}
+
+  </section>
+  }
+
+  @else {
+  <div class="flex flex-col items-center justify-center text-center py-20 w-full min-h-[400px]">
+    <div class="bg-gray-100 p-8 rounded-full mb-6 animate-pulse">
+      <i class="fa-solid fa-box-open text-gray-400 text-6xl"></i>
+    </div>
+    <h2 class="text-3xl font-bold text-gray-800 mb-2">No Products Found</h2>
+    <p class="text-gray-500 mb-8 max-w-md mx-auto">
+      We couldn't find any products matching your current filters. Try adjusting your search.
+    </p>
+    <button routerLink="/shop"
+      class="bg-emerald-500 cursor-pointer hover:bg-emerald-600 text-white px-10 py-3 rounded-xl font-bold shadow-lg shadow-emerald-100 transition-all transform active:scale-95">
+      View All Products
+    </button>
+  </div>
+  }
+  <section class="bg-emerald-50 py-12 border-t border-emerald-100 mt-20">
+    <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+      <div class="flex items-center gap-4">
+        <div class="text-emerald-500 bg-white p-3 rounded-xl shadow-sm"><i class="fa-solid fa-truck-fast text-2xl"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-gray-800 text-sm">Free Shipping</h4>
+          <p class="text-gray-500 text-xs">On orders over 500 EGP</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="text-emerald-500 bg-white p-3 rounded-xl shadow-sm"><i class="fa-solid fa-rotate-left text-2xl"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-gray-800 text-sm">Easy Returns</h4>
+          <p class="text-gray-500 text-xs">14-day return policy</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="text-emerald-500 bg-white p-3 rounded-xl shadow-sm"><i
+            class="fa-solid fa-shield-halved text-2xl"></i></div>
+        <div>
+          <h4 class="font-bold text-gray-800 text-sm">Secure Payment</h4>
+          <p class="text-gray-500 text-xs">100% secure checkout</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="text-emerald-500 bg-white p-3 rounded-xl shadow-sm"><i class="fa-solid fa-headset text-2xl"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-gray-800 text-sm">24/7 Support</h4>
+          <p class="text-gray-500 text-xs">Contact us anytime</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</section>

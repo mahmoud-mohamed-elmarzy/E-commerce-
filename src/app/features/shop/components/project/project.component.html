@@ -1,0 +1,68 @@
+@if(productList().length>0){
+
+<section class="bg-[#0aad0a] text-white py-12 px-6 mb-8 rounded-lg">
+  <div class="container mx-auto flex items-center gap-6">
+    <div class="bg-white/20 p-4 rounded-xl backdrop-blur-sm">
+      <img [src]="ImagePage()" [alt]="NamePage()" class="w-16 h-16 object-contain">
+    </div>
+
+    <div>
+      <nav class="flex mb-2 text-sm text-white/80" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-2">
+          <li routerLink="/" class="cursor-pointer text-gray-700 hover:text-white">Home</li>
+          <li><span class="mx-2">/</span>Categories</li>
+          <li><span class="mx-2">/</span>{{ NamePage() }}</li>
+        </ol>
+      </nav>
+      <h1 class="text-4xl font-bold mb-2">{{ NamePage() }}</h1>
+      <p class="text-white/90">Browse products in {{ NamePage() }}</p>
+    </div>
+  </div>
+</section>
+}@else {
+
+<section class="bg-[#0aad0a] text-white py-12 px-6 mb-8 rounded-lg">
+  <div class="container mx-auto flex items-center gap-6">
+    <div class="bg-white/20 p-4 rounded-xl backdrop-blur-sm">
+      <i class="fa-solid fa-box"></i>
+    </div>
+
+    <div>
+      <nav class="flex mb-2 text-sm text-white/80" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-2">
+          <li routerLink="/" class="cursor-pointer text-gray-700 hover:text-white">Home</li>
+          <li><span class="mx-2">/</span>All Products</li>
+
+        </ol>
+      </nav>
+      <h1 class="text-4xl font-bold mb-2">All Products</h1>
+      <p class="text-white/90">Explore our complete product collection</p>
+    </div>
+  </div>
+</section>
+}
+
+<div class="container mx-auto">
+  <span class="text-gray-500">Showing {{productList().length}} products</span>
+
+</div>
+
+<div class="container mx-auto">
+
+  <div class="mt-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+    @for (item of productList(); track item._id) {
+    <app-card [product]="item"></app-card>
+    }@empty {
+    <div class="col-span-full py-20 text-center">
+      <div class="bg-gray-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i class="fa-solid fa-box-open text-3xl text-gray-400"></i>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-800">No Products Found</h2>
+      <p class="text-gray-500 mb-6">No products match your current filters.</p>
+      <button class="bg-green-600 text-white px-6 py-2 rounded-lg font-medium cursor-pointer" routerLink="/shop">View
+        All Products</button>
+    </div>
+    }
+  </div>
+
+</div>

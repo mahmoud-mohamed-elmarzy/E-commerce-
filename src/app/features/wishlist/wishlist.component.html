@@ -1,0 +1,138 @@
+<div class="container mx-auto p-6 bg-gray-50 min-h-screen">
+  @if (productWishList().length === 0) {
+  <div class=" text-center">
+    <div class="bg-gray-50 p-8 rounded-lg mb-6 ">
+      <svg class="w-16 h-16 text-gray-300 mx-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+        viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+      </svg>
+    </div>
+
+    <h1 class="text-2xl font-bold text-gray-800 mb-2">Your wishlist is empty</h1>
+    <p class="text-gray-500 max-w-sm mb-8 mx-auto">
+      Browse products and save your favorites here. Sign in to sync your wishlist across devices.
+    </p>
+
+    <div class="flex flex-col gap-3 w-full max-w-xs mx-auto">
+      <button routerLink="/shop"
+        class="flex items-center cursor-pointer justify-center gap-2 text-white bg-[#0aad0a] hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-3 transition-colors">
+        Browse Products
+        <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+          viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M19 12H5m14 0-4 4m4-4-4-4" />
+        </svg>
+      </button>
+
+      @if (!isLoggedIn()) {
+      <button routerLink="/login"
+        class="text-gray-900 bg-white border cursor-pointer border-gray-300 focus:outline-none hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-3 transition-colors">
+        Sign In
+      </button>
+      }
+    </div>
+  </div>
+  }@else {<div class="mb-6 bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+    <div class="mb-6">
+      <a routerLink="/" class="text-gray hover:text-black druction-100">Home </a>
+      <a><span class="ms-1">/</span> WishList</a>
+    </div>
+    <div class="flex items-center ">
+
+      <div class="bg-red-50 p-3 rounded-full mr-4">
+        <svg class="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+        </svg>
+      </div>
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900">My Wishlist</h1>
+        <p class="text-gray-400 text-sm font-medium">{{productWishList().length}} items saved</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="relative overflow-hidden bg-white shadow-md sm:rounded-xl border border-gray-100">
+    <table class="w-full text-sm text-left text-gray-500">
+      <thead class="text-xs text-gray-400 uppercase bg-gray-100 ">
+        <tr>
+          <th scope="col" colspan="2" class="px-6  py-5 font-semibold">Product</th>
+          <th scope="col" class="px-6 py-5 font-semibold text-center">Price</th>
+          <th scope="col" class="px-6 py-5 font-semibold text-center">Status</th>
+          <th scope="col" class="px-6 py-5 font-semibold text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        @for (productWish of productWishList(); track productWish._id) {
+        <tr class="bg-white hover:bg-gray-50 transition-colors">
+          <td colspan="2" class="px-6 py-5">
+            <div class="flex items-center min-w-[250px]">
+              <div class="w-20 h-20 flex-shrink-0 border rounded-lg p-1 overflow-hidden bg-white shadow-sm">
+                <img [src]="productWish.imageCover" class="w-full h-full object-contain" [alt]="productWish.title">
+              </div>
+              <div class="ml-4">
+                <div class="text-md font-bold text-gray-900 leading-tight mb-1">{{productWish?.title}}</div>
+                <div class="text-xs text-emerald-600 font-semibold px-2 py-0.5 bg-emerald-50 rounded w-fit">
+                  {{productWish.category.name}}
+                </div>
+              </div>
+            </div>
+          </td>
+
+          <td class="px-6 py-5 text-center font-bold text-gray-900 whitespace-nowrap">
+            {{productWish?.price}} EGP
+          </td>
+
+          <td class="px-6 py-5 text-center">
+            <span
+              class="inline-flex items-center text-emerald-500 text-[10px] uppercase tracking-wider font-bold bg-emerald-50 px-2.5 py-1 rounded-full">
+              <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-1.5"></span> In Stock
+            </span>
+          </td>
+
+          <td class="px-6 py-5">
+            <div class="flex items-center justify-center gap-2">
+              @if(cartIds() && !cartIds().includes(productWish._id)){
+              <button (click)="addToCart(productWish._id)"
+                class="flex cursor-pointer items-center px-4 bg-green-700 hover:bg-green-900 text-white py-2 text-sm font-bold transition-all shadow-sm active:scale-95 rounded-lg border min-w-[130px] justify-center">
+                <i class="fa-solid fa-cart-shopping mr-2 text-xs"></i>
+                <span>Add to Cart</span>
+              </button>
+              } @else {
+              <button routerLink="/cart"
+                class="flex cursor-pointer items-center px-4 py-2 text-sm font-bold transition-all shadow-sm active:scale-95 rounded-lg border border-green-600 text-green-700 bg-green-50 min-w-[130px] justify-center">
+                <i class="fa-solid fa-check mr-2 text-xs"></i>
+                <span>In Cart</span>
+              </button>
+              }
+
+              <button (click)="removeWish(productWish._id)"
+                class="p-2.5 cursor-pointer text-gray-400 hover:text-red-500 bg-gray-50 hover:bg-red-50 rounded-lg transition-colors border border-gray-100 shadow-sm">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+        }@empty{
+        <div class="container  flex justify-center items-center">
+          <div class=" mx-auto">
+            <h1 class="text-gray-600 text-3xl"> <i class="fas fa-spinner fa-spin"></i></h1>
+            <h2 class="text-gray-600 text-3xl">Louding ...... </h2>
+          </div>
+        </div>
+        }
+        <tr>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div>
+    <a routerLink="/shop" class="text-green-700 my-5 block">← Continue Shopping</a>
+  </div>
+}
+</div>

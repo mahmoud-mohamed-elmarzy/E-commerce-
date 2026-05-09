@@ -1,0 +1,9 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+/* لو الـ ng-content فيه داتا (يعني فيه div محقون)، اخفي السعر الافتراضي */
+:host:has([priceSlot]) .default-price {
+  display: none;
+}

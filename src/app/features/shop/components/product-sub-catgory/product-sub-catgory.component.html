@@ -1,0 +1,64 @@
+<section>
+  <section class="bg-[#0aad0a] text-white py-12 px-6 mb-8 rounded-lg">
+    <div class="container mx-auto flex items-center gap-6">
+      <div class="bg-white/20 p-4 rounded-xl backdrop-blur-sm">
+
+  <i class="fa-regular fa-folder-open"></i>
+      </div>
+
+      <div>
+        <nav class="flex mb-2 text-sm text-white/80" aria-label="Breadcrumb">
+          <ol class="inline-flex items-center space-x-1 md:space-x-2">
+            <li routerLink="/" class="cursor-pointer text-gray-100 cursor-pointer hover:text-white">Home</li>
+            <li><span class="mx-2">/</span><span class="hover:text-white cursor-pointer" routerLink="/categories">Categories</span></li>
+            <li><span class="mx-2">/</span>{{ NameAddress() }}</li>
+          </ol>
+        </nav>
+        <h1 class="text-4xl font-bold mb-2">{{ NameAddress() }}</h1>
+        <p class="text-white/90">Browse  {{ NameAddress() }}</p>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  <div class="container mx-auto">
+    <div>
+
+      <b class="block fa-lg text-gray-500 py-10">Showing {{productList().length}} products </b>
+    </div>
+
+
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+
+      @if(productList().length>0){ @for (product of productList(); track product._id) {
+      <app-card [product]="product"></app-card>
+      }
+
+      @empty {
+      <div class="col-span-full flex flex-col justify-center items-center py-20">
+        <i class="fas fa-spinner fa-spin text-4xl text-blue-500 mb-4"></i>
+        <h2 class="text-gray-500 text-xl font-medium">Loading Products...</h2>
+      </div>
+      }}@else{
+      <div
+        class="col-span-full py-20 flex flex-col items-center justify-center bg-white rounded-2xl shadow-sm border border-gray-100 text-center">
+        <div class="w-32 h-32 bg-gray-100 rounded-full flex items-center justify-center text-gray-300 mb-6">
+          <i class="fas fa-box-open text-6xl"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-800 mb-2">No Products Found</h3>
+        <p class="text-gray-500 mb-8 max-w-md">No products match this subcategory at the moment.</p>
+        <button routerLink="/shop"
+          class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition-transform hover:scale-105">
+          View All Products
+        </button>
+      </div>
+
+      }
+    </div>
+  </div>
+
+</section>
