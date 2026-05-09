@@ -1,15 +1,30 @@
 <div class="container mx-auto py-8 px-4">
   <div class="flex flex-col lg:flex-row gap-8">
 
-    <aside class="w-full lg:w-1/5 sticky top-20 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm self-start">
-      <h2 class="text-xl font-bold mb-6">Categories</h2>
+    <button (click)="changefilter()"
+      class="sm:hidden fixed bottom-5 right-5 z-50 bg-green-600 text-white p-4 rounded-full shadow-lg">
+      <i class="fa-solid fa-sliders"></i> Filters
+    </button>
+
+    @if (isFilterOpen()) {
+    <div (click)="changefilter()" class="fixed inset-0 bg-black/50 z-50 sm:hidden"></div>
+    }
+
+    <aside #elmentaside [class.translate-x-0]="isFilterOpen()" [class.-translate-x-full]="!isFilterOpen()"
+      class="fixed inset-y-0 left-0 w-full z-55  max-w-xs bg-white p-6 overflow-y-auto transition-transform duration-300 ease-in-out sm:translate-x-0 sm:w-1/5 sm:block sm:sticky sm:top-20 rounded-2xl border border-gray-100 shadow-sm self-start">
+
+      <div class="flex justify-between items-center sm:hidden mb-6">
+        <h2 class="text-xl font-bold">Filters</h2>
+        <button (click)="changefilter()"><i class="fa-solid fa-xmark text-2xl"></i></button>
+      </div>
+
+      <h2 class="text-xl font-bold mb-6 hidden sm:block">Categories</h2>
       <ul class="space-y-3 mb-8 max-h-60 overflow-y-auto pr-2 custom-scrollbar">
         @for (cat of categories(); track cat._id) {
         <li class="flex items-center gap-3 group cursor-pointer">
           <input type="checkbox" [id]="cat._id" #element [checked]="isChecked() === false ? false : null"
             (change)="onCategoryChange($event, cat._id)"
             class="w-5 h-5 rounded border-gray-300 text-green-600 focus:ring-green-500">
-
           <label [for]="cat._id" class="text-gray-600 group-hover:text-green-600 transition-colors cursor-pointer">
             {{ cat.name }}
           </label>
@@ -17,13 +32,7 @@
         }
       </ul>
 
-      <h2 class="text-xl font-bold mb-4">Price Range</h2>
-      <div class="flex gap-2 mb-6">
-        <input type="number" placeholder="Min"
-          class="w-1/2 p-2 border rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-green-500">
-        <input type="number" placeholder="Max"
-          class="w-1/2 p-2 border rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-green-500">
-      </div>
+
       <h2 class="text-xl font-bold mb-6">Brands</h2>
       <ul class="space-y-3 mb-8 max-h-60 overflow-y-auto pr-2 custom-scrollbar">
         @for (brand of brands(); track brand._id) {
@@ -31,21 +40,12 @@
           <input type="checkbox" [id]="brand._id" #el [checked]="isChecked() === false ? false : null"
             (change)="onBrandChange($event, brand._id)"
             class="w-5 h-5 rounded border-gray-300 text-green-600 focus:ring-green-500">
-
           <label [for]="brand._id" class="text-gray-600 group-hover:text-green-600 transition-colors cursor-pointer">
             {{ brand.name }}
           </label>
         </li>
         }
       </ul>
-      <div class="grid grid-cols-2 gap-2">
-        <button
-          class="text-xs p-2 bg-gray-50 hover:bg-green-50 rounded-lg text-gray-500 hover:text-green-600 transition-all">Under
-          500</button>
-        <button
-          class="text-xs p-2 bg-gray-50 hover:bg-green-50 rounded-lg text-gray-500 hover:text-green-600 transition-all">Under
-          1K</button>
-      </div>
     </aside>
 
     <main class="w-full lg:w-3/4">

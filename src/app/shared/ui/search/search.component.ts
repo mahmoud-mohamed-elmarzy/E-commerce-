@@ -38,6 +38,7 @@ export class SearchComponent {
   changes = signal<'grid' | 'list'>('list');
   @ViewChildren('brandCheck') brandInputs!: QueryList<ElementRef>;
   @ViewChildren('catCheck') catInputs!: QueryList<ElementRef>;
+  @ViewChild('elmentaside') elmentaside!: ElementRef;
   currentBrand = signal<string>('');
   currentCategory = signal<string>('');
   pageSize = signal<number>(0);
@@ -143,4 +144,10 @@ export class SearchComponent {
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+// داخل الـ Class بتاعك
+isFilterOpen = signal<boolean>(false);
+
+changefilter(): void {
+  this.isFilterOpen.set(!this.isFilterOpen());
+}
 }
