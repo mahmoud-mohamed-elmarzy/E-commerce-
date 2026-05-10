@@ -30,6 +30,7 @@ export class AuthService {
   }
   signOut(): void {
     localStorage.removeItem('freshToken');
+    localStorage.removeItem('freshUser');
     this.islogged.set(false);
     this.router.navigate(['/login']);
   }
